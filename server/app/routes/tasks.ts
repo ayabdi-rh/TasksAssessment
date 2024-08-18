@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { authMiddleware } from "../middlewares/auth";
-import { createTask, getTasks, updateTask } from "../queries/task";
+import { createTask, deleteTask, getTasks, updateTask } from "../queries/task";
 
 const router = express.Router();
 router.use(authMiddleware);
@@ -68,4 +68,21 @@ router.put("/:id", async (req: Request, res: Response) => {
   }
 });
 
+
+router.delete("/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    // Delete task
+    const deletedTask = await deleteTask(id);
+
+    if (!deletedTask) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    res.json({ message: "Task deleted successfully" });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+})
 export default router

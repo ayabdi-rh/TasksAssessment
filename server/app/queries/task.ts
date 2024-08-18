@@ -28,3 +28,9 @@ export const updateTask = async (id: string, data: Partial<CreateTask>) => {
     data,
   });
 };
+
+export const deleteTask = async (id: string) => {
+  return await prisma.task.delete({
+    where: { id },
+  });
+};
