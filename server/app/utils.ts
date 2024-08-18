@@ -3,6 +3,7 @@ type EnvVariables = {
   PORT: number;
   DATABASE_URL: string;
   JWT_SECRET: string;
+  CLIENT_URL: string
 };
 
 export function getEnv<T extends keyof EnvVariables>(key: T): EnvVariables[T] {
