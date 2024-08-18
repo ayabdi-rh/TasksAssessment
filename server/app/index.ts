@@ -7,6 +7,7 @@ import http from 'http'
 
 import auth from './routes/auth'
 import tasks from './routes/tasks'
+import cookieParser from 'cookie-parser'
 
 // config dotenv
 dotenv.config()
@@ -21,6 +22,8 @@ app.use(cors())
 // body-parser
 app.use(bodyParser.json({ limit: '50mb', type: 'application/json' }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+
+app.use(cookieParser())
 
 // init morgan logger
 app.use(morgan(':method :url :status - :response-time ms'))

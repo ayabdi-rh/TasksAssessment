@@ -1,11 +1,13 @@
 import express, { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import cookieParser from 'cookie-parser';
 import { createUser, CreateUser, getUserByEmail } from "../queries/user";
 import { User } from "@prisma/client";
 import { getEnv } from "../utils";
 
 const router = express.Router();
+router.use(cookieParser());
 
 router.get("/", async (req: Request, res: Response) => {
   return res.json(req.user);
@@ -25,7 +27,7 @@ router.post("/login", async (req: Request, res: Response) => {
   const validPassword = await bcrypt.compare(password, user.password);
   if (!validPassword) return res.status(400).send("Invalid Email/Password");
 
-  const token = jwt.sign({ userId: user.id }, getEnv("JWT_SECRET"), {
+  const token = jwt.sign({ id: user.id }, getEnv("JWT_SECRET"), {
     expiresIn: "1h",
   });
 
@@ -57,12 +59,15 @@ router.post("/signup", async (req: Request, res: Response) => {
     }
 
     // Validate password strength
-    if (password.length < 8) {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#\-_])[A-Za-z\d@$!%*?&#\-_]{8,}$/;
+    if (!passwordRegex.test(password)) {
       return res
         .status(400)
-        .send("Password must be at least 8 characters long");
+        .send(
+          "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&#-_)"
+        );
     }
-
     // Check if user already exists
     const existingUser = await getUserByEmail(email);
     if (existingUser) {
@@ -86,8 +91,8 @@ router.post("/signup", async (req: Request, res: Response) => {
 
     // Create and send JWT
     const token = jwt.sign(
-      { userId: user.id },
-      process.env.JWT_SECRET as string,
+      { id: user.id },
+      getEnv("JWT_SECRET") as string,
       { expiresIn: "1h" }
     );
 
@@ -104,5 +109,4 @@ router.post("/signup", async (req: Request, res: Response) => {
   }
 });
 
-
-export default router
+export default router;
