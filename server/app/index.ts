@@ -13,7 +13,7 @@ dotenv.config()
 
 const app: Express = express()
 const server = http.createServer(app)
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8082
 
 // cors
 app.use(cors())
