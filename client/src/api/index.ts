@@ -1,24 +1,20 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 export const baseURL = import.meta.env.VITE_REACT_APP_BASE_URL;
 
 export const axiosPublic = axios.create({
-  baseURL: import.meta.env.VITE_REACT_APP_BASE_URL
+  baseURL: import.meta.env.VITE_REACT_APP_BASE_URL,
 });
 
 export let axiosPrivate = axios.create({
-  baseURL: import.meta.env.VITE_REACT_APP_BASE_URL
+  baseURL: import.meta.env.VITE_REACT_APP_BASE_URL,
 });
 
-
-axiosPrivate.interceptors.request.use(
-  function (config) {
-    config.withCredentials = true
-    return config;
-  }
-);
+axiosPrivate.interceptors.request.use(function (config) {
+  config.withCredentials = true;
+  return config;
+});
 
 axiosPrivate.interceptors.response.use(
   (response) => {
@@ -31,9 +27,10 @@ axiosPrivate.interceptors.response.use(
     }
 
     if (error?.response?.status === 401) {
-      window.location.href = "/login";
+      const currentPage = window.location.pathname;
+      if (currentPage === "/login") return;
 
-      // Optionally, you can show a toast notification
+      window.location.href = "/login";
       toast.info("Your session has expired. Please log in again.");
     }
 

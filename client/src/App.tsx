@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -7,10 +7,12 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-
+import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
 import { useGetUser } from "./api/auth";
 import { UserType } from "./dto/user.dto";
+import Tasks from "./pages/Tasks";
+import SignUp from "./pages/Signup";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +30,7 @@ const RedirectToAppropriatePage = ({ user }: { user?: UserType }) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (user) {
-      navigate("/signup");
+      navigate("/tasks");
     } else {
       navigate("/login");
     }
@@ -45,12 +47,15 @@ const AppContent = () => {
         {!user ? (
           <>
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp/>} />
           </>
         ) : (
-          <></>
+          <>
+            <Route path="/tasks" element={<Tasks />} />
+          </>
         )}
         <Route path="/" element={<RedirectToAppropriatePage user={user} />} />
-        <Route path="*" element={<RedirectToAppropriatePage user={user} />} />
+        {/* <Route path="*" element={<RedirectToAppropriatePage user={user} />} /> */}
       </Routes>
 
       <ToastContainer
