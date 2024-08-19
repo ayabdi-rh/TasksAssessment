@@ -1,17 +1,33 @@
 import { FormEvent, useState } from "react";
 import { useLogin } from "../api/auth";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 const Login = () => {
   const { mutate: logIn } = useLogin();
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    logIn({ email, password });
+    logIn(formData);
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const isFormValid = Object.values(formData).every(
+    (value) => value.trim() !== ""
+  );
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -33,67 +49,43 @@ const Login = () => {
           className="space-y-6"
           onSubmit={handleLogin}
         >
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Email address
-            </label>
-            <div className="mt-2">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="email"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
+          <Input
+            name="email"
+            type="email"
+            onChange={handleChange}
+            required
+            label="Email Address"
+            autoComplete="email"
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+          />
+
+          <Input
+            name="password"
+            type="password"
+            onChange={handleChange}
+            required
+            label="Password"
+            autoComplete="current-password"
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+          />
 
           <div>
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Password
-              </label>
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-semibold text-orange-600 hover:text-orange-500"
-                >
-                  Forgot password?
-                </a>
-              </div>
-            </div>
-            <div className="mt-2">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                autoComplete="current-password"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
-            >
+            <Button type="submit" disabled={!isFormValid}>
               Sign in
-            </button>
+            </Button>
           </div>
         </form>
 
-        <p className="mt-10 text-center text-sm text-gray-500">
+        <div className="text-sm mt-1.5">
+          <a
+            href="#"
+            className="font-semibold text-orange-600 hover:text-orange-500"
+          >
+            Forgot password?
+          </a>
+        </div>
+
+        <p className="mt-5 text-center text-sm text-gray-500">
           Not a member?{" "}
           <a
             onClick={() => navigate("/signup")}
