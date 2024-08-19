@@ -28,6 +28,7 @@ const Application = () => {
 
 const RedirectToAppropriatePage = ({ user }: { user?: UserType }) => {
   const navigate = useNavigate();
+  
   useEffect(() => {
     if (user) {
       navigate("/tasks");
@@ -40,11 +41,11 @@ const RedirectToAppropriatePage = ({ user }: { user?: UserType }) => {
 };
 
 const AppContent = () => {
-  const { data: user } = useGetUser();
+  const { data: user, isLoading } = useGetUser();
   return (
     <>
       <Routes>
-        {!user ? (
+        {!user && !isLoading ? (
           <>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp/>} />
@@ -55,7 +56,7 @@ const AppContent = () => {
           </>
         )}
         <Route path="/" element={<RedirectToAppropriatePage user={user} />} />
-        {/* <Route path="*" element={<RedirectToAppropriatePage user={user} />} /> */}
+        <Route path="*" element={<RedirectToAppropriatePage user={user} />} />
       </Routes>
 
       <ToastContainer

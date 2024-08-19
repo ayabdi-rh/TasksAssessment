@@ -1,8 +1,4 @@
-import {
-  useMutation,
-  useQuery,
-  UseQueryResult,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, UseQueryResult } from "@tanstack/react-query";
 import { axiosPrivate } from ".";
 import { UserSchema, UserType } from "../dto/user.dto";
 import { toast } from "react-toastify";
@@ -22,7 +18,7 @@ export const useGetUser = () => {
     },
     retry() {
       return false;
-    }
+    },
   }) as UseQueryResult<UserType>;
 };
 
@@ -38,7 +34,7 @@ export const useLogin = () => {
     },
     onSuccess: () => {
       toast.success("Logged In successfully");
-      window.location.href = "/"
+      window.location.href = "/";
     },
     onError: (error: any) => {
       toast.error(error.response.data.error);
@@ -63,9 +59,10 @@ export const useSignup = () => {
     },
     onSuccess: () => {
       toast.success("Logged In successfully");
+      window.location.href = "/";
     },
     onError: (error: any) => {
       toast.error(error.response.data.error);
     },
   });
-}
+};
