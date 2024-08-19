@@ -1,33 +1,9 @@
-import { FormEvent, useState } from "react";
-import { useLogin } from "../api/auth";
-import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
-  const { mutate: logIn } = useLogin();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
-
-  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    logIn(formData);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const isFormValid = Object.values(formData).every(
-    (value) => value.trim() !== ""
-  );
+  const { navigate, handleChange, handleLogin, isFormValid } = useLogin();
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

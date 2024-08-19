@@ -22,7 +22,7 @@ export const useGetUser = () => {
   }) as UseQueryResult<UserType>;
 };
 
-export const useLogin = () => {
+export const useLoginMutation = () => {
   return useMutation({
     mutationFn: async (payload: { email: string; password: string }) => {
       try {
@@ -42,7 +42,7 @@ export const useLogin = () => {
   });
 };
 
-export const useSignup = () => {
+export const useSignupMutation = () => {
   return useMutation({
     mutationFn: async (payload: {
       email: string;

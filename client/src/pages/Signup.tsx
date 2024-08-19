@@ -1,86 +1,10 @@
-import { FormEvent, useState } from "react";
-import { useSignup } from "../api/auth";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import { useNavigate } from "react-router-dom";
+import { useSignUp } from "../hooks/useSignUp";
 
 const SignUp = () => {
-  const { mutate: signup } = useSignup();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-  });
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-  });
-  const navigate = useNavigate();
-
-  const validateForm = () => {
-    let isValid = true;
-    const newErrors = { ...errors };
-
-    if (!formData.email) {
-      newErrors.email = "Email is required";
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
-      isValid = false;
-    } else {
-      newErrors.email = "";
-    }
-
-    if (!formData.password) {
-      newErrors.password = "Password is required";
-      isValid = false;
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-      isValid = false;
-    } else {
-      newErrors.password = "";
-    }
-
-    if (!formData.firstName) {
-      newErrors.firstName = "First name is required";
-      isValid = false;
-    } else {
-      newErrors.firstName = "";
-    }
-
-    if (!formData.lastName) {
-      newErrors.lastName = "Last name is required";
-      isValid = false;
-    } else {
-      newErrors.lastName = "";
-    }
-
-    setErrors(newErrors);
-    return isValid;
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (validateForm()) {
-      signup(formData);
-    }
-  };
-
-  const isFormValid = Object.values(formData).every(
-    (value) => value.trim() !== ""
-  );
-
+  const { handleChange, handleSubmit, isFormValid, navigate, errors } = useSignUp();
+  
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
