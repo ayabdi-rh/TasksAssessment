@@ -107,8 +107,6 @@ router.post("/signup", async (req: Request, res: Response) => {
       firstName,
       lastName,
     };
-
-    // Save user to database (mock implementation)
     const user = await createUser(data);
 
     // Create and send JWT
@@ -118,7 +116,7 @@ router.post("/signup", async (req: Request, res: Response) => {
 
     res.cookie("auth_token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: getEnv("NODE_ENV") === "production",
       sameSite: "strict",
       maxAge: 3600000, // 1 hour
     });
