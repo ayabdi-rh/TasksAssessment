@@ -5,6 +5,8 @@ interface EditorState {
   isOpen: boolean
   status?: TaskStatus
   selectedTask?: TaskType
+  formData: any // Replace 'any' with the actual type of formData
+  deleteModalOpen: boolean
 }
 
 interface TaskStoreState {
@@ -15,7 +17,9 @@ interface TaskStoreState {
 
 const initialEditorState: EditorState = {
   isOpen: false,
-  selectedTask: undefined
+  selectedTask: undefined,
+  formData: {}, // Replace with the initial state of formData
+  deleteModalOpen: false
 }
 
 export const useTasksStore = create<TaskStoreState>(set => ({

@@ -60,6 +60,7 @@ export const useUpdateTask = () => {
 }
 
 export const useDeleteTask = () => {
+  const queryClient = useQueryClient()
   return useMutation({
     mutationFn: async (id: string) => {
       try {
@@ -71,6 +72,7 @@ export const useDeleteTask = () => {
     },
     onSuccess: () => {
       toast.success('Task successfully deleted')
+      queryClient.invalidateQueries({ queryKey: ['tasks'] })
     },
     onError: (error: any) => {
       toast.error(error.response.data.error)
