@@ -1,17 +1,16 @@
 import { useSensors, useSensor, PointerSensor, DragEndEvent, DragStartEvent } from '@dnd-kit/core'
-import { useEffect, useMemo, useState } from 'react'
+import {  useMemo, useState } from 'react'
 import { ColumnType } from '../components/KanbanBoard'
 import { TaskStatus, TaskType } from '../../../dto/tasks.dto'
 import { useGetTasks, useUpdateTask } from '../api/tasks'
-import { arrayMove } from '@dnd-kit/sortable'
 
 export const useKanbanBoard = () => {
-  const { data: tasksData } = useGetTasks()
+  const { data: tasks } = useGetTasks()
   const { mutate: updateTaskMutation } = useUpdateTask()
 
   const [activeColumn, setActiveColumn] = useState<ColumnType | null>(null)
   const [activeTask, setActiveTask] = useState<TaskType | null>(null)
-  const [tasks, setTasks] = useState<TaskType[]>([])
+
 
   const columnDefinitions = [
     { name: 'BACKLOG', color: 'gray' },
@@ -52,54 +51,30 @@ export const useKanbanBoard = () => {
   }
 
   function onDragEnd(event: DragEndEvent) {
+    if (!tasks) return
+
     setActiveColumn(null)
     setActiveTask(null)
-
+  
     const { active, over } = event
-    if (!over) return
-
+    if (!over || active.id === over.id || active.data.current?.type !== 'Task') return
+  
     const activeId = active.id
     const overId = over.id
-
-    if (activeId === overId) return
-
-    const isActiveATask = active.data.current?.type === 'Task'
-    const isOverATask = over.data.current?.type === 'Task'
-
-    if (!isActiveATask) return
-
-    // Im dropping a Task over another Task
-    if (isActiveATask && isOverATask) {
-      const activeIndex = tasks.findIndex(t => t.id === activeId)
-      const overIndex = tasks.findIndex(t => t.id === overId)
-      setTasks(tasks => {
-        if (tasks[activeIndex].status != tasks[overIndex].status) {
-          tasks[activeIndex].status = tasks[overIndex].status
-          return arrayMove(tasks, activeIndex, overIndex - 1)
-        }
-        return arrayMove(tasks, activeIndex, overIndex)
-      })
-    }
-
-    const isOverAColumn = over.data.current?.type === 'Column'
-
-    // Im dropping a Task over a column
-    if (isActiveATask && isOverAColumn) {
-      setTasks(tasks => {
-        const activeIndex = tasks.findIndex(t => t.id === activeId)
-        tasks[activeIndex].status = String(overId) as any
-
-        onUpdateTask(tasks[activeIndex].id, overId as TaskStatus)
-        return arrayMove(tasks, activeIndex, activeIndex)
-      })
+    const activeIndex = tasks?.findIndex(t => t.id === activeId)
+  
+    // Determine new status based on drop target
+    const newStatus = over.data.current?.type === 'Column' 
+      ? overId as TaskStatus 
+      : tasks.find(t => t.id === overId)?.status as TaskStatus
+  
+    // Update task status
+    if (newStatus) {
+      tasks[activeIndex].status = newStatus
+      onUpdateTask(tasks[activeIndex].id, newStatus)
     }
   }
 
-  useEffect(() => {
-    if (tasksData) {
-      setTasks(tasksData)
-    }
-  }, [tasksData])
 
   return {
     activeColumn,
