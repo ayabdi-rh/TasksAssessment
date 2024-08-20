@@ -9,7 +9,7 @@ import {
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./features/auth/pages/Login";
-import { useGetUser } from "./api/auth";
+import { useGetUser } from "./features/auth/api/auth";
 import { UserType } from "./features/auth/dto/user.dto";
 import Tasks from "./features/tasks/pages/Tasks";
 import SignUp from "./features/auth/pages/Signup";

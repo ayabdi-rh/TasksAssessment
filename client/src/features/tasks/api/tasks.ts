@@ -33,7 +33,7 @@ export const useCreateTask = () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
     },
     onError: (error: any) => {
-      toast.error(error.response.data)
+      toast.error(error?.response?.data || error.message)
     }
   })
 }
@@ -54,7 +54,7 @@ export const useUpdateTask = () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
     },
     onError: (error: any) => {
-      toast.error(error.response.data)
+      toast.error(error?.response?.data || error.message)
     }
   })
 }
@@ -75,7 +75,7 @@ export const useDeleteTask = () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
     },
     onError: (error: any) => {
-      toast.error(error.response.data)
+      toast.error(error?.response?.data || error.message)
     }
   })
 }

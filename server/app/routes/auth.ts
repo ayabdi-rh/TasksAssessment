@@ -133,7 +133,7 @@ router.post('/logout', (req: Request, res: Response) => {
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict'
   });
-  res.status(200).json({ message: 'Logged out successfully' });
+  res.status(200).send('Logged out successfully');
 });
 
 

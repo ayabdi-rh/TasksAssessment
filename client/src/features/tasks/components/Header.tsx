@@ -1,4 +1,4 @@
-import { useLogOutMutation } from '../../../api/auth'
+import { useLogOutMutation } from '../../auth/api/auth'
 
 const Header = () => {
   const { mutate: logout } = useLogOutMutation()
