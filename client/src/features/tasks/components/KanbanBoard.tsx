@@ -36,12 +36,13 @@ const KanbanBoard: React.FC = () => {
           <DragOverlay>
             {activeColumn && (
               <ColumnContainer
+              key={'drag'}
                 column={activeColumn.name}
                 columnColor={activeColumn.color}
                 tasks={activeColumn.tasks}
               />
             )}
-            {activeTask && <TaskCard task={activeTask} column={activeColumn?.name}/>}
+            {activeTask && <TaskCard task={activeTask} />}
           </DragOverlay>,
           document.body
         )}

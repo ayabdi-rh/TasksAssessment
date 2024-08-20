@@ -1,4 +1,4 @@
-import { useMutation, useQuery, UseQueryResult } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient, UseQueryResult } from '@tanstack/react-query'
 import { axiosPrivate } from '../../../api'
 import { CreateTask, TasksSchemaDTO, TaskType } from '../../../dto/tasks.dto'
 import { toast } from 'react-toastify'
@@ -18,6 +18,7 @@ export const useGetTasks = () => {
 }
 
 export const useCreateTask = () => {
+  const queryClient = useQueryClient()
   return useMutation({
     mutationFn: async (body: CreateTask) => {
       try {
@@ -29,6 +30,7 @@ export const useCreateTask = () => {
     },
     onSuccess: () => {
       toast.success('Task successfully created')
+      queryClient.invalidateQueries({ queryKey: ['tasks'] })
     },
     onError: (error: any) => {
       toast.error(error.response.data.error)
@@ -37,6 +39,7 @@ export const useCreateTask = () => {
 }
 
 export const useUpdateTask = () => {
+  const queryClient = useQueryClient()
   return useMutation({
     mutationFn: async ({ id, body }: { id: string; body: Partial<CreateTask> }) => {
       try {
@@ -48,6 +51,7 @@ export const useUpdateTask = () => {
     },
     onSuccess: () => {
       toast.success('Task successfully updated')
+      queryClient.invalidateQueries({ queryKey: ['tasks'] })
     },
     onError: (error: any) => {
       toast.error(error.response.data.error)

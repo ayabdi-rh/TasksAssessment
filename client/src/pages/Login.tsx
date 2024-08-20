@@ -3,7 +3,7 @@ import Input from '../components/Input'
 import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
-  const { navigate, handleChange, handleLogin, isFormValid } = useLogin()
+  const { navigate, handleChange, handleLogin, isFormValid, isLoading } = useLogin()
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -41,7 +41,7 @@ const Login = () => {
           />
 
           <div>
-            <Button type="submit" disabled={!isFormValid}>
+            <Button type="submit" disabled={!isFormValid} loading={isLoading}>
               Sign in
             </Button>
           </div>

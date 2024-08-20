@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../api/auth";
 
 export const useLogin = () => {
-  const { mutate: logIn } = useLoginMutation();
+  const { mutate: logIn, isPending } = useLoginMutation();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -33,5 +33,6 @@ export const useLogin = () => {
     handleChange,
     handleLogin,
     isFormValid,
+    isLoading: isPending
   };
 };

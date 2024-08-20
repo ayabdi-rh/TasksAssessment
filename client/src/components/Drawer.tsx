@@ -4,12 +4,12 @@ interface Props {
   title: string
   children: React.ReactNode
   isOpen: boolean
-  setIsOpen: (isOpen: boolean) => void
+  close: () => void
 }
 
-export default function Drawer({ children, title, isOpen, setIsOpen }: Props) {
+export default function Drawer({ children, title, isOpen, close }: Props) {
   return (
-    <Dialog open={isOpen} onClose={setIsOpen} className="relative z-10">
+    <Dialog open={isOpen} onClose={close} className="relative z-10">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity duration-500 ease-in-out data-[closed]:opacity-0"
@@ -26,7 +26,7 @@ export default function Drawer({ children, title, isOpen, setIsOpen }: Props) {
                 <div className="absolute left-0 top-0 -ml-8 flex pr-2 pt-4 duration-500 ease-in-out data-[closed]:opacity-0 sm:-ml-10 sm:pr-4">
                   <button
                     type="button"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => close}
                     className="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
                   >
                     <span className="absolute -inset-2.5" />
@@ -41,7 +41,7 @@ export default function Drawer({ children, title, isOpen, setIsOpen }: Props) {
                     {title}
                   </DialogTitle>
                 </div>
-                <div className="relative mt-6 flex-1 px-4 sm:px-6 h-full pb-10">{children}</div>
+                <div className="relative mt-6 flex-1 px-4 sm:px-6 h-full">{children}</div>
               </div>
             </DialogPanel>
           </div>
