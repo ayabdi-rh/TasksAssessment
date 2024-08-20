@@ -1,10 +1,10 @@
-import Drawer from '../../../components/Drawer'
-import Input from '../../../components/Input'
-import ListBox from '../../../components/ListBox'
-import Button from '../../../components/Button'
+import Drawer from '../../../common/Drawer'
+import Input from '../../../common/Input'
+import ListBox from '../../../common/ListBox'
+import Button from '../../../common/Button'
 import { useTaskEditor } from '../hooks/useTaskEditor'
 import trashicon from '../../../assets/Trash.svg'
-import Modal from '../../../components/Modal'
+import Modal from '../../../common/Modal'
 
 const TaskEditor = () => {
   const {

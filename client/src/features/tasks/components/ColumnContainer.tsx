@@ -1,7 +1,7 @@
 import { SortableContext, useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { useMemo } from 'react'
-import { TaskStatus, TaskType } from '../../../dto/tasks.dto'
+import { TaskStatus, TaskType } from '../dto/tasks.dto'
 import TaskCard from './TaskCard'
 import { cleanText } from '../../../utlis/helpers'
 import { useTasksStore } from '../store/useTasksStore'

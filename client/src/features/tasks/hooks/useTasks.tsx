@@ -1,7 +1,7 @@
 import { useSensors, useSensor, PointerSensor, DragEndEvent, DragStartEvent } from '@dnd-kit/core'
 import { useMemo, useState } from 'react'
 import { ColumnType } from '../components/KanbanBoard'
-import { TaskStatus, TaskType } from '../../../dto/tasks.dto'
+import { TaskStatus, TaskType } from '../dto/tasks.dto'
 import { useGetTasks, useUpdateTask } from '../api/tasks'
 
 export const useTasks = () => {

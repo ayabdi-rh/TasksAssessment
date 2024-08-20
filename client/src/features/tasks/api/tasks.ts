@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient, UseQueryResult } from '@tanstack/react-query'
 import { axiosPrivate } from '../../../api'
-import { CreateTask, TasksSchemaDTO, TaskType } from '../../../dto/tasks.dto'
+import { CreateTask, TasksSchemaDTO, TaskType } from '../dto/tasks.dto'
 import { toast } from 'react-toastify'
 
 export const useGetTasks = () => {

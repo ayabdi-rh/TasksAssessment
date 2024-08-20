@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../api/auth";
+import { useLoginMutation } from "../../../api/auth";
 
 export const useLogin = () => {
   const { mutate: logIn, isPending } = useLoginMutation();

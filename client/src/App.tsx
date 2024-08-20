@@ -8,11 +8,11 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Login from "./pages/Login";
+import Login from "./features/auth/pages/Login";
 import { useGetUser } from "./api/auth";
-import { UserType } from "./dto/user.dto";
+import { UserType } from "./features/auth/dto/user.dto";
 import Tasks from "./features/tasks/pages/Tasks";
-import SignUp from "./pages/Signup";
+import SignUp from "./features/auth/pages/Signup";
 
 const queryClient = new QueryClient();
 

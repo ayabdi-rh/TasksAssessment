@@ -3,7 +3,7 @@ import { SortableContext } from '@dnd-kit/sortable'
 import React from 'react'
 import { createPortal } from 'react-dom'
 import ColumnContainer from './ColumnContainer'
-import { TaskType } from '../../../dto/tasks.dto'
+import { TaskType } from '../dto/tasks.dto'
 import { useTasks } from '../hooks/useTasks'
 import TaskCard from './TaskCard'
 

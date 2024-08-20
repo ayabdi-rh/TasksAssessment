@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { CreateTask, TaskStatus, TaskType } from '../../../dto/tasks.dto'
+import { CreateTask, TaskStatus, TaskType } from '../dto/tasks.dto'
 
 interface EditorState {
   isOpen: boolean

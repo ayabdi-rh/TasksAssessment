@@ -1,6 +1,6 @@
 import { useMutation, useQuery, UseQueryResult } from '@tanstack/react-query'
 import { axiosPrivate } from '.'
-import { UserSchemaDTO, UserType } from '../dto/user.dto'
+import { UserSchemaDTO, UserType } from '../features/auth/dto/user.dto'
 import { toast } from 'react-toastify'
 
 export const useGetUser = () => {

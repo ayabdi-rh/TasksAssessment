@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { TaskType } from '../../../dto/tasks.dto'
+import { TaskType } from '../dto/tasks.dto'
 import editicon from '../../../assets/edit.svg'
 import { useTasksStore } from '../store/useTasksStore'
 
@@ -52,10 +52,13 @@ function TaskCard({ task }: Props) {
     >
       <div className="flex w-full max-h-20 overflow-clip">
         {task?.name}
+
         <div className="flex ml-auto gap-1">
           <img src={editicon} className="h-4 w-4 ml-auto cursor-pointer" onClick={selectTask} />
         </div>
       </div>
+
+      <div className='text-xs text-stone-400 overflow-clip h-max'>{task?.description}</div>
     </div>
   )
 }
