@@ -61,6 +61,7 @@ const TaskEditor = () => {
         </div>
       </form>
 
+      {/* Delete Task Dialog Modal */}
       <Modal isOpen={deleteModalOpen} close={() => setDeleteModalOpen(false)} title="Delete Task?">
         <p className="text-sm text-gray-500">
           Are you sure you want to deactivate your account? All of your data will be permanently removed. This
