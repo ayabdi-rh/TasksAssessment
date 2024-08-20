@@ -10,7 +10,7 @@ export const TasksSchemaDTO = z.object({
 
 export const CreateTaskSchema = z.object({
   name: z.string(),
-  description: z.string(),
+  description: z.string().nullish().default(''),
   status: TaskStatusEnum.default('BACKLOG')
 })
 

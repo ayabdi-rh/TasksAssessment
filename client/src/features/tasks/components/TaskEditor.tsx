@@ -40,7 +40,7 @@ const TaskEditor = () => {
         <Input
           name="description"
           type="text"
-          value={formData.description}
+          value={formData.description || ''}
           onChange={e => handleChange({ name: e.target.name, value: e.target.value })}
           label="Task Description"
         />

@@ -4,7 +4,7 @@ import { ColumnType } from '../components/KanbanBoard'
 import { TaskStatus, TaskType } from '../../../dto/tasks.dto'
 import { useGetTasks, useUpdateTask } from '../api/tasks'
 
-export const useKanbanBoard = () => {
+export const useTasks = () => {
   // Fetch tasks and get update mutation
   const { data: tasks } = useGetTasks()
   const { mutate: updateTaskMutation } = useUpdateTask()
@@ -58,7 +58,7 @@ export const useKanbanBoard = () => {
 
   function onDragEnd(event: DragEndEvent) {
     if (!tasks) return
-
+    
     setActiveColumn(null)
     setActiveTask(null)
 

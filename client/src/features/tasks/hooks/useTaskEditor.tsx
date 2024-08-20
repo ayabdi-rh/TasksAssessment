@@ -6,28 +6,22 @@ export const useTaskEditor = () => {
   const { mutate: createTask, isPending: isCreating } = useCreateTask()
   const { mutate: updateTask, isPending: isUpdating } = useUpdateTask()
   const { mutate: deleteTask, isPending: isDeleting } = useDeleteTask()
-  const { editorState, resetEditorState, setEditorState } = useTasksStore()
-
-  const initialState = {
-    name: editorState.selectedTask?.name || '',
-    description: editorState.selectedTask?.description || '',
-    status: editorState.selectedTask?.status || editorState.status || 'BACKLOG'
-  }
+  const { editorState, resetEditorState, resetFormData, setEditorState, setFormData, formData } =
+    useTasksStore()
 
   const handleChange = (e: { name: string; value: string }) => {
     const { name, value } = e
-    setEditorState({
-      formData: {
-        ...editorState.formData,
-        [name]: value
-      }
-    })
+    setFormData({ [name]: value })
+  }
+
+  const close = () => {
+    resetEditorState()
+    resetFormData()
   }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const onSuccess = () => resetEditorState()
-    const formData = editorState.formData
+    const onSuccess = () => close()
 
     if (!!editorState.selectedTask) {
       updateTask({ id: editorState.selectedTask.id, body: formData }, { onSuccess })
@@ -41,26 +35,31 @@ export const useTaskEditor = () => {
     if (!taskId) return
     deleteTask(taskId, {
       onSuccess: () => {
-        resetEditorState()
+        close()
       }
     })
   }
 
   // Set Initial Form State
   useEffect(() => {
-    if (editorState.selectedTask || editorState.status) {
-      setEditorState({
-        formData: initialState
+    if (!editorState) return
+
+    const { selectedTask, status } = editorState
+    if (editorState || status) {
+      setFormData({
+        name: selectedTask?.name || '',
+        status: selectedTask?.status || status,
+        description: selectedTask?.description || ''
       })
     }
   }, [editorState.selectedTask, editorState.status])
 
   return {
     selectedTask: editorState.selectedTask,
-    formData: editorState.formData,
+    formData,
     isOpen: editorState.isOpen,
     handleChange,
-    close: resetEditorState,
+    close,
     onSubmit,
     onDelete,
     loading: isUpdating || isCreating,

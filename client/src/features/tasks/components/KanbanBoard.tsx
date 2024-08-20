@@ -4,7 +4,7 @@ import React from 'react'
 import { createPortal } from 'react-dom'
 import ColumnContainer from './ColumnContainer'
 import { TaskType } from '../../../dto/tasks.dto'
-import { useKanbanBoard } from '../hooks/useKanban'
+import { useTasks } from '../hooks/useTasks'
 import TaskCard from './TaskCard'
 
 export interface ColumnType {
@@ -14,7 +14,7 @@ export interface ColumnType {
 }
 
 const KanbanBoard: React.FC = () => {
-  const { activeColumn, activeTask, columnsId, sensors, columns, onDragEnd, onDragStart } = useKanbanBoard()
+  const { activeColumn, activeTask, columnsId, sensors, columns, onDragEnd, onDragStart } = useTasks()
 
   return (
     <div className="text-text-active mx-auto my-5 flex">
