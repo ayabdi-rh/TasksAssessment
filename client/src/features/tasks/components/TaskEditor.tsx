@@ -22,12 +22,14 @@ const TaskEditor = () => {
   } = useTaskEditor()
   return (
     <Drawer isOpen={isOpen} close={close} title={selectedTask ? 'Edit Task' : 'Create Task'}>
-      <img
-        src={trashicon}
-        className="h-5 w-5 ml-auto cursor-pointer -mt-11"
-        onClick={() => setDeleteModalOpen(true)}
-      />
-      <form className="mt-5 flex flex-col gap-3 h-full" onSubmit={onSubmit}>
+      {selectedTask && (
+        <img
+          src={trashicon}
+          className="absolute h-5 w-5 right-6 -top-12 cursor-pointer"
+          onClick={() => setDeleteModalOpen(true)}
+        />
+      )}
+      <form className="flex flex-col gap-3 h-full" onSubmit={onSubmit}>
         <Input
           name="name"
           type="text"
