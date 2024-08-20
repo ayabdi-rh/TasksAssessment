@@ -1,10 +1,8 @@
-# Use the specific Node.js image
-FROM node:20@sha256:cb7cd40ba6483f37f791e1aace576df449fc5f75332c19ff59e2c6064797160e
+FROM node:20
 
 # Set up the working directory
 WORKDIR /app
 
-# Install your application's dependencies including Puppeteer
 RUN npm install
 
 # Build your application if necessary
