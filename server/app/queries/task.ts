@@ -5,6 +5,7 @@ export interface CreateTask {
   name: string;
   userId: string;
   status?: TaskStatus;
+  description: string
 }
 export const createTask = async (data: CreateTask) => {
   return await prisma.task.create({

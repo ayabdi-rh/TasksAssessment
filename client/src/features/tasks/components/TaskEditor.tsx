@@ -52,7 +52,7 @@ const TaskEditor = () => {
           setSelected={s => handleChange({ name: 'status', value: s })}
         />
         <div className="mt-auto flex gap-2">
-          <Button className="bg-white text-black border hover:bg-stone-50" onClick={close}>
+          <Button className="bg-white !text-black border hover:bg-stone-50" onClick={close}>
             Cancel
           </Button>
           <Button loading={loading} type="submit">
@@ -69,7 +69,7 @@ const TaskEditor = () => {
         </p>
 
         <div className="mt-8 pb-2 flex gap-2">
-          <Button className="bg-white text-black border hover:bg-stone-50" onClick={close}>
+          <Button className="bg-white !text-black border hover:bg-stone-50" onClick={close}>
             Cancel
           </Button>
           <Button loading={isDeleting} onClick={onDelete}>
