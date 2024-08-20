@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSignupMutation } from "../api/auth";
 
 export const useSignUp = () => {
-  const { mutate: signup } = useSignupMutation();
+  const { mutate: signup, isPending } = useSignupMutation();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -84,6 +84,7 @@ export const useSignUp = () => {
     handleSubmit,
     isFormValid,
     navigate,
-    errors
+    errors,
+    loading: isPending
   };
 };

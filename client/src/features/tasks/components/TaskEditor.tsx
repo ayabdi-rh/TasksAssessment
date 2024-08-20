@@ -64,8 +64,7 @@ const TaskEditor = () => {
       {/* Delete Task Dialog Modal */}
       <Modal isOpen={deleteModalOpen} close={() => setDeleteModalOpen(false)} title="Delete Task?">
         <p className="text-sm text-gray-500">
-          Are you sure you want to deactivate your account? All of your data will be permanently removed. This
-          action cannot be undone.
+          Are you sure you want to delete this task? This cannot be recovered
         </p>
 
         <div className="mt-8 pb-2 flex gap-2">
@@ -73,7 +72,7 @@ const TaskEditor = () => {
             Cancel
           </Button>
           <Button loading={isDeleting} onClick={onDelete}>
-            Save
+            Delete
           </Button>
         </div>
       </Modal>

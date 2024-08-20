@@ -28,7 +28,7 @@ axiosPrivate.interceptors.response.use(
 
     if (error?.response?.status === 401) {
       const currentPage = window.location.pathname
-      if (currentPage === '/login') return
+      if (currentPage === '/login' || currentPage === '/signup') return
 
       window.location.href = '/login'
       toast.info('Your session has expired. Please log in again.')

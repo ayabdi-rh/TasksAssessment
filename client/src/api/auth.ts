@@ -37,7 +37,7 @@ export const useLoginMutation = () => {
       window.location.href = '/'
     },
     onError: (error: any) => {
-      toast.error(error.response.data.error)
+      toast.error(error.response.data)
     }
   })
 }
@@ -57,7 +57,7 @@ export const useSignupMutation = () => {
       window.location.href = '/'
     },
     onError: (error: any) => {
-      toast.error(error.response.data.error)
+      toast.error(error.response.data)
     }
   })
 }
