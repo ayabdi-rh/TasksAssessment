@@ -61,3 +61,23 @@ export const useSignupMutation = () => {
     }
   })
 }
+
+export const useLogOutMutation = () => {
+  return useMutation({
+    mutationFn: async () => {
+      try {
+        const { data } = await axiosPrivate.post('/auth/logout')
+        return data
+      } catch (error) {
+        throw error
+      }
+    },
+    onSuccess: () => {
+      toast.success('Logged Out successfully')
+      window.location.href = '/'
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.error)
+    }
+  })
+}
