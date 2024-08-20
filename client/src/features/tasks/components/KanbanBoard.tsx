@@ -1,0 +1,53 @@
+import { DndContext, DragOverlay } from '@dnd-kit/core'
+import { SortableContext } from '@dnd-kit/sortable'
+import React from 'react'
+import { createPortal } from 'react-dom'
+import ColumnContainer from './ColumnContainer'
+import { TaskType } from '../../../dto/tasks.dto'
+import { useKanbanBoard } from '../hooks/useKanban'
+import TaskCard from './TaskCard'
+
+export interface ColumnType {
+  name: string
+  color: string
+  tasks: TaskType[]
+}
+
+const KanbanBoard: React.FC = () => {
+  const { activeColumn, activeTask, columnsId, sensors, columns, onDragEnd, onDragStart } = useKanbanBoard()
+
+  return (
+    <div className="text-text-active mx-auto my-5 flex">
+      <DndContext sensors={sensors} onDragStart={onDragStart} onDragEnd={onDragEnd}>
+        <div className="flex gap-6">
+          <SortableContext items={columnsId}>
+            {columns?.map(col => (
+              <ColumnContainer
+                key={col.name}
+                columnColor={col.color || 'blue'}
+                column={col.name}
+                tasks={col.tasks}
+              />
+            ))}
+          </SortableContext>
+        </div>
+
+        {createPortal(
+          <DragOverlay>
+            {activeColumn && (
+              <ColumnContainer
+                column={activeColumn.name}
+                columnColor={activeColumn.color}
+                tasks={activeColumn.tasks}
+              />
+            )}
+            {activeTask && <TaskCard task={activeTask} column={activeColumn?.name}/>}
+          </DragOverlay>,
+          document.body
+        )}
+      </DndContext>
+    </div>
+  )
+}
+
+export default KanbanBoard

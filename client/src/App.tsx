@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
 import { useGetUser } from "./api/auth";
 import { UserType } from "./dto/user.dto";
-import Tasks from "./pages/Tasks";
+import Tasks from "./features/tasks/pages/Tasks";
 import SignUp from "./pages/Signup";
 
 const queryClient = new QueryClient();
@@ -28,7 +28,7 @@ const Application = () => {
 
 const RedirectToAppropriatePage = ({ user }: { user?: UserType }) => {
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (user) {
       navigate("/tasks");

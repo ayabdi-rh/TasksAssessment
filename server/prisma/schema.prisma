@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
@@ -15,7 +15,7 @@ model User {
     lastName  String   @default("")
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    Tasks      Task[]
+    Tasks     Task[]
 }
 
 enum TaskStatus {
@@ -26,11 +26,12 @@ enum TaskStatus {
 }
 
 model Task {
-    id        String     @id @default(uuid())
-    userId    String
-    name      String
-    status    TaskStatus @default(BACKLOG)
-    createdAt DateTime   @default(now())
-    updatedAt DateTime   @updatedAt
-    user      User       @relation(fields: [userId], references: [id])
+    id          String     @id @default(uuid())
+    userId      String
+    name        String
+    description String?
+    status      TaskStatus @default(BACKLOG)
+    createdAt   DateTime   @default(now())
+    updatedAt   DateTime   @updatedAt
+    user        User       @relation(fields: [userId], references: [id])
 }

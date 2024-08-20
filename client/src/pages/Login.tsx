@@ -1,9 +1,9 @@
-import Button from "../components/Button";
-import Input from "../components/Input";
-import { useLogin } from "../hooks/useLogin";
+import Button from '../components/Button'
+import Input from '../components/Input'
+import { useLogin } from '../hooks/useLogin'
 
 const Login = () => {
-  const { navigate, handleChange, handleLogin, isFormValid } = useLogin();
+  const { navigate, handleChange, handleLogin, isFormValid } = useLogin()
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -19,12 +19,7 @@ const Login = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form
-          action="#"
-          method="POST"
-          className="space-y-6"
-          onSubmit={handleLogin}
-        >
+        <form action="#" method="POST" className="space-y-6" onSubmit={handleLogin}>
           <Input
             name="email"
             type="email"
@@ -53,18 +48,15 @@ const Login = () => {
         </form>
 
         <div className="text-sm mt-1.5">
-          <a
-            href="#"
-            className="font-semibold text-orange-600 hover:text-orange-500"
-          >
+          <a href="#" className="font-semibold text-orange-600 hover:text-orange-500">
             Forgot password?
           </a>
         </div>
 
         <p className="mt-5 text-center text-sm text-gray-500">
-          Not a member?{" "}
+          Not a member?{' '}
           <a
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate('/signup')}
             className="font-semibold leading-6 text-orange-600 hover:text-orange-500 hover:underline cursor-pointer"
           >
             Sign Up Here
@@ -72,7 +64,7 @@ const Login = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

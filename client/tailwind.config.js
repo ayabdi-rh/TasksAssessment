@@ -6,8 +6,6 @@ export default {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     fontFamily: {
-      anek: ['Anek latin'],
-      quicksand: ['Quicksand'],
       Inter: ['Inter', ...defaultTheme.fontFamily.sans]
     },
     fontSize: {
