@@ -27,10 +27,11 @@ router.post("/", async (req: Request, res: Response) => {
 
     // Validate Status
     if (status && !validStatus.includes(status)) {
-      return res.status(400).json({
-        message:
-          "Invalid status. Valid Statuses: 'BACKLOG', 'TODO', 'IN_PROGRESS', 'COMPLETE'",
-      });
+      return res
+        .status(400)
+        .send(
+          "Invalid status. Valid Statuses: 'BACKLOG', 'TODO', 'IN_PROGRESS', 'COMPLETE'"
+        );
     }
 
     // Create new task
@@ -67,9 +68,7 @@ router.patch("/:id", async (req: Request, res: Response) => {
     const updatedTask = await updateTask(id, req.body);
 
     if (!updatedTask) {
-      return res.status(404).json({
-        message: "Task not found",
-      });
+      return res.status(404).json("Task not found");
     }
 
     res.json(updatedTask);
