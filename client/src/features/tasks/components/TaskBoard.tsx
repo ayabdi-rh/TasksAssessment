@@ -13,7 +13,7 @@ export interface ColumnType {
   tasks: TaskType[]
 }
 
-const KanbanBoard: React.FC = () => {
+const TaskBoard: React.FC = () => {
   const { activeColumn, activeTask, columnsId, sensors, columns, onDragEnd, onDragStart } = useTasks()
 
   return (
@@ -51,4 +51,4 @@ const KanbanBoard: React.FC = () => {
   )
 }
 
-export default KanbanBoard
+export default TaskBoard
