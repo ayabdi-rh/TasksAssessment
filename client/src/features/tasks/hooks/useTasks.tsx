@@ -56,9 +56,10 @@ export const useTasks = () => {
     }
   }
 
+  // Handle drag end event
   function onDragEnd(event: DragEndEvent) {
     if (!tasks) return
-    
+
     setActiveColumn(null)
     setActiveTask(null)
 

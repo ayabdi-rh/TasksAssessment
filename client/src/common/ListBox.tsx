@@ -14,7 +14,7 @@ export default function ListBox({ selected, setSelected, options, label }: Props
       <div className="relative -mt-1">
         <ListboxButton className="relative w-full cursor-default rounded-md bg-white py-1.5 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
           <span className="flex items-center">
-            <span className="ml-3 block truncate h-6">{selected || ""}</span>
+            <span className="ml-3 block truncate h-6">{selected || ''}</span>
           </span>
         </ListboxButton>
 
@@ -35,7 +35,7 @@ export default function ListBox({ selected, setSelected, options, label }: Props
               </div>
 
               <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
-                {/* <CheckIcon aria-hidden="true" className="h-5 w-5" /> */}
+                ✓
               </span>
             </ListboxOption>
           ))}

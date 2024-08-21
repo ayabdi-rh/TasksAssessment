@@ -3,12 +3,16 @@ import { useTasksStore } from '../store/useTasksStore'
 import { useCreateTask, useDeleteTask, useUpdateTask } from '../api/tasks'
 
 export const useTaskEditor = () => {
+  // API Hooks
   const { mutate: createTask, isPending: isCreating } = useCreateTask()
   const { mutate: updateTask, isPending: isUpdating } = useUpdateTask()
   const { mutate: deleteTask, isPending: isDeleting } = useDeleteTask()
+
+  // Global Task Editor States
   const { editorState, resetEditorState, resetFormData, setEditorState, setFormData, formData } =
     useTasksStore()
 
+  // Form Functions
   const handleChange = (e: { name: string; value: string }) => {
     const { name, value } = e
     setFormData({ [name]: value })

@@ -9,10 +9,8 @@ export const useGetUser = () => {
     queryFn: async () => {
       try {
         const { data } = await axiosPrivate.get('/auth/me')
-        console.log(data)
         return UserSchemaDTO.parse(data)
       } catch (error: any) {
-        console.log(error.message)
         throw error
       }
     },
@@ -34,7 +32,7 @@ export const useLoginMutation = () => {
     },
     onSuccess: () => {
       toast.success('Logged In successfully')
-      window.location.href = '/'
+      window.location.href = '/' // Redirect to homepage
     },
     onError: (error: any) => {
       toast.error(error?.response?.data || error.message)

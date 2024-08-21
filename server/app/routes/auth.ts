@@ -15,6 +15,7 @@ import { authMiddleware } from "../middlewares/auth";
 const router = express.Router();
 router.use(cookieParser());
 
+// Get User details
 router.get("/me", authMiddleware, async (req: Request, res: Response) => {
   try {
     const user = await getUser(req.user!.id);
@@ -40,16 +41,18 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 
   try {
+    // Check if User exists
     const user: User | null = await getUserByEmail(email);
     if (!user) return res.status(400).send("Invalid Email/Password");
 
+    // Validate password
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) return res.status(400).send("Invalid Email/Password");
 
+    // Generate token and Cookie
     const token = jwt.sign({ id: user.id }, getEnv("JWT_SECRET"), {
       expiresIn: "1h",
     });
-
     res.cookie("auth_token", token, {
       httpOnly: true,
       secure: getEnv("NODE_ENV") === "production",
@@ -109,11 +112,12 @@ router.post("/signup", async (req: Request, res: Response) => {
     };
     const user = await createUser(data);
 
-    // Create and send JWT
+    // Create JWT
     const token = jwt.sign({ id: user.id }, getEnv("JWT_SECRET") as string, {
       expiresIn: "1h",
     });
 
+    // Generate Cookie
     res.cookie("auth_token", token, {
       httpOnly: true,
       secure: getEnv("NODE_ENV") === "production",

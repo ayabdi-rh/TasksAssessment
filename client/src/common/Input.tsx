@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react'
 
 interface Props {
-  className?: string;
-  placeholder?: string;
-  required?: boolean;
-  type: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  name?: string;
-  label: string;
-  value?: string;
-  disabled?: boolean;
-  autoComplete?: string;
-  error?: string;
+  className?: string
+  placeholder?: string
+  required?: boolean
+  type: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  name?: string
+  label: string
+  value?: string
+  disabled?: boolean
+  autoComplete?: string
+  error?: string
 }
 
 const Input: React.FC<Props> = ({
@@ -23,15 +23,12 @@ const Input: React.FC<Props> = ({
   type,
   value,
   disabled,
-  autoComplete = "on",
-  error,
+  autoComplete = 'on',
+  error
 }: Props): JSX.Element => {
   return (
     <div>
-      <label
-        htmlFor="email"
-        className="block text-sm font-medium leading-6 text-gray-900"
-      >
+      <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
         {label}
       </label>
       <div className="mt-2">
@@ -50,7 +47,7 @@ const Input: React.FC<Props> = ({
         {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

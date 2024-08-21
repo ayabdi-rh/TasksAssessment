@@ -6,9 +6,9 @@ const Tasks = () => {
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 q-full font-Inter">
       <div className="w-[1240px] mx-auto">
-      <Header/>
+        <Header />
         <TaskBoard />
-        <TaskEditor/>
+        <TaskEditor />
       </div>
     </div>
   )

@@ -30,8 +30,7 @@ export default function Drawer({ children, title, isOpen, close }: Props) {
                     className="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
                   >
                     <span className="absolute -inset-2.5" />
-                    <span className="sr-only">Close panel</span>
-                    {/* <XMarkIcon aria-hidden="true" className="h-6 w-6" /> */}X
+                    <span className="sr-only">Close panel</span>X
                   </button>
                 </div>
               </TransitionChild>
