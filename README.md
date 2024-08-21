@@ -6,6 +6,12 @@ This is a full-stack task management application with a React frontend and a Nod
 
 The project is divided into two main parts: the client-side React application and the server-side Node.js application.
 
+## DEMO & Postman Documentation
+
+Demo url: https://tasks-arr.up.railway.app/
+
+Postman Collection: https://www.postman.com/ayabdi11/workspace/tasks/collection/12351362-b15fcaf2-2bdf-4d99-9904-63a3ab65c81a?action=share&creator=12351362
+
 ## Key Directories and Files
 
 ### Client
